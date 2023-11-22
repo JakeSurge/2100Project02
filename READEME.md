@@ -1,0 +1,1 @@
+This is the repository for the Project02 from Database Programming (CPSC2100). Instructions for this are included in the PDF in this repository.
