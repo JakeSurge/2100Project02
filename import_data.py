@@ -1,21 +1,18 @@
 import psycopg as pg
 import json
 
-def add_item(id, name, stackibility, attack_speed, attack_damage, peaceful_obtainable, renewable):
+def add_item(id, name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable):
     cursor = connection.cursor()            #cursor for db connection
-
-    #change stackibility value if it is "Unstackable"
-    if stackibility.lower() == 'unstackable':
-        stackiblity = 1
 
     #string variable for the actual insert sql statement
     sql = """
-        INSERT INTO items (item_id, item_name, stackibility, attack_speed, attack_damage, peaceful_obtainable, renewable)
-        VALUES (%s, %s, %s, %s, %s, %s, %s);
+        INSERT INTO items (item_id, item_name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING;
           """
 
     #execute sql statment with passed parameters
-    cursor.execute(sql, (id, name, stackibility, attack_speed, attack_damage, peaceful_obtainable, renewable))
+    cursor.execute(sql, (id, name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable))
 
     #commit changes and close cursor
     connection.commit()
@@ -49,14 +46,19 @@ try:
             #set values of item to variables to use for add_item funct
             id = item['id']
             name = item['item']
-            stackibility = item['stackibility']
             attack_speed = item['attack_speed']
             attack_damage = item['attack_damage']
             peaceful_obtainable = item['peaceful_obtainable']
             renewable = item['renewable']
+
+            #decision logic to prevent issue with stackability
+            if item['stackability'] == "Unstackable":
+                stackability = 1
+            else:
+                stackability = item['stackability']
             
             #use add_item to add item information to db
-            add_item(id, name, stackibility, attack_speed, attack_damage, peaceful_obtainable, renewable)
+            add_item(id, name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
 finally:
     if connection:
         connection.close()
