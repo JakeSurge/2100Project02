@@ -4,6 +4,10 @@ import json
 def add_item(id, name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable):
     cursor = connection.cursor()            #cursor for db connection
 
+    #change stackibility value if it is "Unstackable"
+    if stackibility.lower() == 'unstackable':
+        stackiblity = 1
+
     #string variable for the actual insert sql statement
     sql = """
         INSERT INTO items (item_id, item_name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
