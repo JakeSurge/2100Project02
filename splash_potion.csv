@@ -1,0 +1,46 @@
+﻿id,name
+minecraft:splash_potion,Splash Potion
+minecraft:splash_potion{Potion:regeneration},Splash Potion of Regeneration(0:45)
+minecraft:splash_potion{Potion:swiftness},Splash Potion of Swiftness (3:00)
+minecraft:splash_potion{Potion:fire_resistance},Fire Resistance Splash Potion (3:00)
+minecraft:splash_potion{Potion:poison},Poision Splash Potion (0:45)
+minecraft:splash_potion{Potion:healing},Healing Splash Potion
+minecraft:splash_potion{Potion:night_vision},Night Vision Splash Potion (3:00)
+minecraft:splash_potion{Potion:weakness},Weakness Splash Potion (1:30)
+minecraft:splash_potion{Potion:strength},Strength Splash Potion (3:00)
+minecraft:splash_potion{Potion:slowness},Slowness Splash Potion (1:30)
+minecraft:splash_potion{Potion:harming},Harming Splash Potion
+minecraft:splash_potion{Potion:water_breathing},Water Breathing Splash Potion (3:00)
+minecraft:splash_potion{Potion:invisibility},Invisibility Splash Potion (3:00)
+minecraft:splash_potion{Potion:strong_regeneration},Regeneration II Splash Potion (0:45)
+minecraft:splash_potion{Potion:strong_swiftness},Swiftness II Splash Potion (1:30)
+minecraft:splash_potion{Potion:strong_poison},Poision II Splash Potion (0:16)
+minecraft:splash_potion{Potion:strong_healing},Healing II Splash Potion
+minecraft:splash_potion{Potion:strong_poison},Strength II Splash Potion (1:30)
+minecraft:splash_potion{Potion:strong_leaping},Leaping II Splash Potion (1:30)
+minecraft:splash_potion{Potion:strong_harming},Harming II Splash Potion
+minecraft:splash_potion{Potion:long_regeneration},Regeneration Splash Potion (1:30)
+minecraft:splash_potion{Potion:long_swiftness},Swiftness Splash Potion (6:00)
+minecraft:splash_potion{Potion:long_fire_resistance},Fire Resistance Splash Potion (6:00)
+minecraft:splash_potion{Potion:long_poison},Poison Splash Potion (1:30)
+minecraft:splash_potion{Potion:long_night_vision},Night Vision Splash Potion (6:00)
+minecraft:splash_potion{Potion:long_weakness},Weakness Splash Potion (3:00)
+minecraft:splash_potion{Potion:long_strength},Strength Splash Potion (6:00)
+minecraft:splash_potion{Potion:long_slowness},Slowness Splash Potion (3:00)
+minecraft:splash_potion{Potion:leaping},Leaping Splash Potion (3:00)
+minecraft:splash_potion{Potion:long_water_breathing},Water Breathing Splash Potion (6:00)
+minecraft:splash_potion{Potion:long_invisibility},Invisibility Splash Potion (6:00)
+,
+minecraft:splash_potion{Potion:strong_swiftness},Swiftness II Splash Potion (3:00)
+minecraft:splash_potion{Potion:strong_poison},Poison II Splash Potion (0:45)
+minecraft:splash_potion{Potion:strong_strength},Strength II Splash Potion (3:00)
+,
+,
+,
+,
+,
+,
+,
+,
+,
+minecraft:splash_potion{Potion:luck},Splash Potion of Luck (5:00)
