@@ -1,6 +1,5 @@
 ﻿id,name
 potion,Potion
-lingering_potion,Lingering Potion
 potion{Potion:water},Water Bottle
 potion{Potion:empty},Uncraftable Potion
 potion{Potion:awkward},Akward Potion
@@ -20,12 +19,12 @@ potion{Potion:water_breathing},Potion of Water Breathing (3:00)
 potion{Potion:invisibility},Potion of Invisibility (3:00)
 potion{Potion:strong_regeneration},Potion of  Regeneration II (0:22)
 potion{Potion:strong_swiftness},Potion of Swiftness II (1:30)
-potion{Potion:strong_poison},Potion of Poison II (0:22)
+potion{Potion:strong_poison},Potion of Poison II (0:21)
 potion{Potion:strong_healing},Potion of Healing II
 potion{Potion:strong_strength},Potion of Strength II (1:30)
 potion{Potion:strong_leaping},Potion of Leaping II (1:30)
 potion{Potion:strong_harming},Potion of Harming II
-potion{Potion:long_regeneration},Potion of Regeneration (2:00)
+potion{Potion:long_regeneration},Potion of Regeneration (1:30)
 potion{Potion:long_swiftness},Potion of Swiftness (8:00)
 potion{Potion:long_fire_resistance},Potion of Fire Resistance (8:00)
 potion{Potion:long_poison},Potion of Poison (1:30)
@@ -36,12 +35,11 @@ potion{Potion:long_slowness},Potion of Slowness (4:00)
 potion{Potion:leaping},Potion of Leaping (3:00)
 potion{Potion:long_water_breathing},Potion of Water Breathing (8:00)
 potion{Potion:long_invisibility},Potion of Invisibility (8:00)
-potion{Potion:strong_swiftness},Potion of Swiftness II (4:00)
-potion{Potion:strong_poison},Potion of Poison II (1:00)
-potion{Potion:strong_strength},Potion of Strength II (4:00)
 potion{Potion:turtle_master},Potion of the Turtle Master (0:20)
 potion{Potion:long_turtle_master},Potion of the Turtle Master (0:40)
 potion{Potion:strong_turtle_master},Potion of the Turtle Master II (0:20)
 potion{Potion:slow_falling},Potion of Slow Falling (1:30)
 potion{Potion:long_slow_falling},Potion of Slow Falling (4:00)
 potion{Potion:luck},Potion of Luck (5:00)
+potion{Potion:long_leaping},Potion of Leaping (8:00)
+potion{Potion:strong_slowness},Potion of Slowness IV (0:20)
