@@ -149,7 +149,7 @@ try:
                 #call function to add the potions to the items table
                 add_potion(id, name, peaceful_obtainable)
     
-    #open files if exists to add potion items to items table
+    #open files if exists to add splash potion items to items table
     with open('items_files/splash_potions.csv', 'r') as f:
         file = csv.reader(f)
 
@@ -169,7 +169,7 @@ try:
                 #call function to add the potions to the items table
                 add_splash_potion(id, name, peaceful_obtainable)
     
-    #open files if exists to add potion items to items table
+    #open files if exists to add lingering potion items to items table
     with open('items_files/lingering_potions.csv', 'r') as f:
         file = csv.reader(f)
 
@@ -184,7 +184,7 @@ try:
                 #call function to add the potions to the items table
                 add_lingering_potion(id, name)
     
-    #open files if exists to add potion items to items table
+    #open files if exists to add tipped arrow items to items table
     with open('items_files/tipped_arrows.csv', 'r') as f:
         file = csv.reader(f)
 
