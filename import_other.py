@@ -19,6 +19,57 @@ def add_survival_obtainable(id, survival_obtainable):
     connection.commit()
     cursor.close()
 
+def add_fuel_duration(id, fuel_duration):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO fuel_duration (item_id, fuel_duration)
+        VALUES (%s, %s)
+        ON CONFLICT DO NOTHING;
+          """
+
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, fuel_duration))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
+def add_cooldown(id, cooldown):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO cooldown (item_id, cooldown)
+        VALUES (%s, %s)
+        ON CONFLICT DO NOTHING;
+          """
+
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, cooldown))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
+def add_food_item(id, hunger, saturation):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO food_items (item_id, hunger, saturation)
+        VALUES (%s, %s, %s)
+        ON CONFLICT DO NOTHING;
+          """
+
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, hunger, saturation))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
 # OPENING FILE EXAMPLE
 # #open file if exists
 # with open('test.json', 'r') as f:
@@ -35,7 +86,7 @@ def add_survival_obtainable(id, survival_obtainable):
 try:
     connection = pg.connect('dbname=minecraft_items user=postgres password=Ilikepie13$ port=5432')      #connection to minecraft_items database
 
-    #open file if exists to add most of items to items table
+    #open file if exists to add most of items to survial_obtainable table
     with open('other_files/survival_obtainable.json', 'r') as f:
         file = json.load(f)         #python list = to json file
         
@@ -85,7 +136,55 @@ try:
                 #call function to add the potions to the survial_obtainable table
                 add_survival_obtainable(id, survival_obtainable)
     
+    #open file if exists to add items to fuel duration table
+    with open('other_files/fuel_duration.json', 'r') as f:
+        file = json.load(f)         #python list = to json file
+        
+        #use for loop to iterate through each json object in the json file
+        for i in file:
+            #convert each json object to a python dictionary
+            item = dict(i)
 
+            #set values of item to variables to use
+            id = item['id']
+            fuel_duration = item['fuel_duration']
+            
+            #call function to add info to fuel_duration table
+            add_fuel_duration(id, fuel_duration)
+    
+    #open file if exists to add items to cooldown table
+    with open('other_files/cooldown.json', 'r') as f:
+        file = json.load(f)         #python list = to json file
+        
+        #use for loop to iterate through each json object in the json file
+        for i in file:
+            #convert each json object to a python dictionary
+            item = dict(i)
+
+            #set values of item to variables to use
+            id = item['id']
+            cooldown = item['cooldown']
+            
+            #call function to add info to cooldown table
+            add_cooldown(id, cooldown)
+    
+    #open file if exists to add items to cooldown table
+    with open('other_files/food_items.json', 'r') as f:
+        file = json.load(f)         #python list = to json file
+        
+        #use for loop to iterate through each json object in the json file
+        for i in file:
+            #convert each json object to a python dictionary
+            item = dict(i)
+
+            #set values of item to variables to use
+            id = item['id']
+            hunger = item['hunger']
+            saturation = item['saturation']
+            
+            #call function to add info to cooldown table
+            add_food_item(id, hunger, saturation)
+    
 finally:
     if connection:
         connection.close()
