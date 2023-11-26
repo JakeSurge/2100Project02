@@ -104,7 +104,7 @@ try:
     connection = pg.connect('dbname=minecraft_items user=postgres password=Ilikepie13$ port=5432')      #connection to minecraft_items database
 
     #open file if exists to add most of items to items table
-    with open('items.json', 'r') as f:
+    with open('items_files/items.json', 'r') as f:
         file = json.load(f)         #python list = to json file
         
         #use for loop to iterate through each json object in the json file
@@ -130,7 +130,7 @@ try:
             add_item(id, name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
 
     #open files if exists to add potion items to items table
-    with open('potions.csv', 'r') as f:
+    with open('items_files/potions.csv', 'r') as f:
         file = csv.reader(f)
 
         next(file)
@@ -150,7 +150,7 @@ try:
                 add_potion(id, name, peaceful_obtainable)
     
     #open files if exists to add potion items to items table
-    with open('splash_potions.csv', 'r') as f:
+    with open('items_files/splash_potions.csv', 'r') as f:
         file = csv.reader(f)
 
         next(file)
@@ -170,7 +170,7 @@ try:
                 add_splash_potion(id, name, peaceful_obtainable)
     
     #open files if exists to add potion items to items table
-    with open('lingering_potions.csv', 'r') as f:
+    with open('items_files/lingering_potions.csv', 'r') as f:
         file = csv.reader(f)
 
         next(file)
@@ -185,7 +185,7 @@ try:
                 add_lingering_potion(id, name)
     
     #open files if exists to add potion items to items table
-    with open('tipped_arrows.csv', 'r') as f:
+    with open('items_files/tipped_arrows.csv', 'r') as f:
         file = csv.reader(f)
 
         next(file)
