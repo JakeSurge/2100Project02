@@ -36,6 +36,57 @@ def add_potion(id, name, peaceful_obtainable):
     connection.commit()
     cursor.close()
 
+def add_splash_potion(id, name, peaceful_obtainable):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO items (item_id, item_name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
+        VALUES (%s, %s, 1, 4, 1, %s, true)
+        ON CONFLICT DO NOTHING;
+          """
+    
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, name, peaceful_obtainable))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
+def add_lingering_potion(id, name):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO items (item_id, item_name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
+        VALUES (%s, %s, 1, 4, 1, false, true)
+        ON CONFLICT DO NOTHING;
+          """
+    
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, name))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
+def add_tipped_arrow(id, name):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO items (item_id, item_name, stackability, attack_speed, attack_damage, peaceful_obtainable, renewable)
+        VALUES (%s, %s, 64, 4, 1, false, true)
+        ON CONFLICT DO NOTHING;
+          """
+    
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, name))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
 # OPENING FILE EXAMPLE
 # #open file if exists
 # with open('test.json', 'r') as f:
@@ -91,7 +142,7 @@ try:
                 id = potion[0]
                 name = potion[1]
                 #assign peaceful_obtainable based off of the type of potion
-                if ("Healing" in potion[1]) or ("Fire Resistance" in potion[1]) or ("Weakness" in potion[1]) or ("Invisibility" in potion[1]) or ("Water" in potion[1]):
+                if ("Healing" in potion[1]) or ("Fire Resistance" in potion[1]) or ("Weakness" in potion[1]) or ("Invisibility" in potion[1]) or ("Water" in potion[1] and "Water Breathing" not in potion[1]):
                     peaceful_obtainable = True
                 else:
                     peaceful_obtainable = False
@@ -108,15 +159,46 @@ try:
         #pushes values as parameters to function that adds them to the db
         for potion in file:
             if potion[0]:
-                id = potion[0].split("minecraft:")[0]
+                id = potion[0]
                 name = potion[1]
                 #assign peaceful_obtainable based off of the type of potion
-                if ("Fire Resistance" in potion[1]) or ("Water" in potion[1]):
+                if ("Fire Resistance" in potion[1]) or ("Water" in potion[1] and "Water Breathing" not in potion[1]):
                     peaceful_obtainable = True
                 else:
                     peaceful_obtainable = False
                 #call function to add the potions to the items table
-                #add_splash_potion(id, name, peaceful_obtainable)
+                add_splash_potion(id, name, peaceful_obtainable)
+    
+    #open files if exists to add potion items to items table
+    with open('lingering_potions.csv', 'r') as f:
+        file = csv.reader(f)
+
+        next(file)
+
+        #for loop that goes through each row of the csv and 
+        #pushes values as parameters to function that adds them to the db
+        for potion in file:
+            if potion[0]:
+                id = potion[0]
+                name = potion[1]
+                #call function to add the potions to the items table
+                add_lingering_potion(id, name)
+    
+    #open files if exists to add potion items to items table
+    with open('tipped_arrows.csv', 'r') as f:
+        file = csv.reader(f)
+
+        next(file)
+
+        #for loop that goes through each row of the csv and 
+        #pushes values as parameters to function that adds them to the db
+        for arrow in file:
+            if arrow[0]:
+                id = arrow[0]
+                name = arrow[1]
+                #call function to add the potions to the items table
+                add_tipped_arrow(id, name)
+
 finally:
     if connection:
         connection.close()

@@ -1,1 +1,45 @@
 id,name
+tipped_arrow,Tipped Arrow
+tipped_arrow{Potion:water},Arrow of Splashing
+tipped_arrow{Potion:mundane},Tipped Arrow (Mundane)
+tipped_arrow{Potion:thick},Tipped Arrow (Thick)
+tipped_arrow{Potion:awkward},Tipped Arrow (Awkward)
+tipped_arrow{Potion:uncraftable},Uncraftable Tipped Arrow
+tipped_arrow{Potion:night_vision},Arrow of Night Vision (0:22)
+tipped_arrow{Potion:long_night_vision},Arrow of Night Vision (1:00)
+tipped_arrow{Potion:invisibility},Arrow of Invisibility (0:22)
+tipped_arrow{Potion:long_invisibility},Arrow of Invisibility (1:00)
+tipped_arrow{Potion:leaping},Arrow of Leaping (0:22)
+tipped_arrow{Potion:long_leaping},Arrow of Leaping (1:00)
+tipped_arrow{Potion:strong_leaping},Arrow of Leaping II (0:11)
+tipped_arrow{Potion:fire_resistance},Arrow of Fire Resistance (0:22)
+tipped_arrow{Potion:long_fire_resistance},Arrow of Fire Resistance (1:00)
+tipped_arrow{Potion:swiftness},Arrow of Swiftness (0:22)
+tipped_arrow{Potion:long_swiftness},Arrow of Swiftness (1:00)
+tipped_arrow{Potion:strong_swiftness},Arrow of Swiftness II (0:11)
+tipped_arrow{Potion:slowness},Arrow of Slowness (0:11)
+tipped_arrow{Potion:long_slowness},Arrow of Slowness (0:30)
+tipped_arrow{Potion:strong_slowness},Arrow of Slowness IV (0:02)
+tipped_arrow{Potion:turtle_master},Arrow of the Turtle Master (0:02)
+tipped_arrow{Potion:long_turtle_master},Arrow of the Turtle Master (0:05)
+tipped_arrow{Potion:strong_turtle_master},Arrow of the Turtle Master II (0:02)
+tipped_arrow{Potion:water_breathing},Arrow of Water Breathing (0:22)
+tipped_arrow{Potion:long_water_breathing},Arrow of Water Breathing (1:00)
+tipped_arrow{Potion:healing},Arrow of Healing
+tipped_arrow{Potion:strong_healing},Arrow of Healing II
+tipped_arrow{Potion:harming},Arrow of Harming
+tipped_arrow{Potion:strong_harming},Arrow of Harming II
+tipped_arrow{Potion:poison},Arrow of Poision (0:05)
+tipped_arrow{Potion:long_poison},Arrow of Poison (0:11)
+tipped_arrow{Potion:strong_poison},Arrow of Posion II (0:02)
+tipped_arrow{Potion:regeneration},Arrow of Regeneration (0:05)
+tipped_arrow{Potion:long_regeneration},Arrow of Regeneration (0:11)
+tipped_arrow{Potion:strong_regeneration},Arrow of Regeneration II (0:02)
+tipped_arrow{Potion:strength},Arrow of Strength (0:22)
+tipped_arrow{Potion:long_strength},Arrow of Strength (1:00)
+tipped_arrow{Potion:strong_strength},Arrow of Strength II (0:11)
+tipped_arrow{Potion:weakness},Arrow of Weakness (0:11)
+tipped_arrow{Potion:long_weakness},Arrow of Weakness (0:30)
+tipped_arrow{Potion:luck},Arrow of Luck (0:37)
+tipped_arrow{Potion:slow_falling},Arrow of Slow Falling (0:11)
+tipped_arrow{Potion:long_slow_falling},Arrow of Slow Falling (0:30)
