@@ -36,6 +36,40 @@ def add_breaking_speed(id, type_id, breaking_speed):
     connection.commit()
     cursor.close()
 
+def add_effect(id, name):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO effects (effect_id, effect_name)
+        VALUES (%s, %s)
+        ON CONFLICT DO NOTHING;
+          """
+
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, name))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
+def add_food_effect(id, effect_id, degree, time, chance):
+    cursor = connection.cursor()            #cursor for db connection
+
+    #string variable for the actual insert sql statement
+    sql = """
+        INSERT INTO food_effects (item_id, effect_id, effect_degree, time, chance)
+        VALUES (%s, %s, %s, %s, %s)
+        ON CONFLICT DO NOTHING;
+          """
+
+    #execute sql statment with passed parameters
+    cursor.execute(sql, (id, effect_id, degree, time, chance))
+
+    #commit changes and close cursor
+    connection.commit()
+    cursor.close()
+
 # OPENING FILE EXAMPLE
 # #open file if exists
 # with open('test.json', 'r') as f:
@@ -91,7 +125,39 @@ try:
             if potion[0]:
                 id = potion[0]
                 add_breaking_speed(id, 1, 1)
+
+    #add effects to effect table
+    with open('association_files/effects.csv', 'r') as f:
+        file = csv.reader(f)
+
+        next(file)
+
+        iteration = 0           #variable for keeping track of for loop iteration
+
+        #for loop that goes through each row of the csv and 
+        #pushes values as parameters to function that adds them to the db
+        for effect in file:
+            iteration+=1
+
+            if effect[0]:
+                name = effect[0]
+                add_effect(iteration, name)
     
+    with open('association_files/food_effects.csv', 'r') as f:
+        file = csv.reader(f)
+
+        next(file)
+
+        #for loop that goes through each row of the csv and 
+        #pushes values as parameters to function that adds them to the db
+        for item in file:
+            if item[0]:
+                id = item[0]
+                effect_id = item[1]
+                degree = item[2]
+                time = item[3]
+                chance = item[4]
+                add_food_effect(id, effect_id, degree, time, chance)
 finally:
     if connection:
         connection.close()
