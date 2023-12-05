@@ -5,41 +5,41 @@ lingering_potion{Potion:mundane},Mundane Lingering Potion
 lingering_potion{Potion:thick},Thick Lingering Potion
 lingering_potion{Potion:awkward},Awkward Lingering Potion
 lingering_potion{Potion:uncraftable},Lingering Uncraftable Potion
-lingering_potion{Potion:night_vision},Lingering Potion of Night Vision (0:45)
-lingering_potion{Potion:long_night_vision},Lingering Potion of Night Vision (2:00)
-lingering_potion{Potion:invisibility},Lingering Potion of Invisibility (0:45)
-lingering_potion{Potion:long_invisibility},Lingering Potion of Invisibility (2:00)
-lingering_potion{Potion:leaping},Lingering Potion of Leaping (0:45)
-lingering_potion{Potion:long_leaping},Lingering Potion of Leaping (2:00)
-lingering_potion{Potion:strong_leaping},Lingering Potion of Leaping II (0:22)
-lingering_potion{Potion:fire_resistance},Lingering Potion of Fire Resistance (0:45)
-lingering_potion{Potion:long_fire_resistance},Lingering Potion of Fire Resistance (2:00)
-lingering_potion{Potion:swiftness},Lingering Potion of Swiftness (0:45)
-lingering_potion{Potion:long_swiftness},Lingering Potion of Swiftness (2:00)
-lingering_potion{Potion:strong_swiftness},Lingering Potion of Swiftness II (0:22)
-lingering_potion{Potion:slowness},Lingering Potion of Slowness (0:22)
-lingering_potion{Potion:long_slowness},Lingering Potion of Slowness (1:00)
-lingering_potion{Potion:strong_slowness},Lingering Potion of Slowness IV (0:05)
-lingering_potion{Potion:turtle_master},Lingering Potion of the Turtle Master (0:05)
-lingering_potion{Potion:long_turtle_master},Lingering Potion of the Turtle Master (0:10)
-lingering_potion{Potion:strong_turtle_master},Lingering Potion of the Turtle Master II (0:05)
-lingering_potion{Potion:water_breathing},Lingering Potion of Water Breathing (0:45)
-lingering_potion{Potion:long_water_breathing},Lingering Potion of Water Breathing (2:00)
+lingering_potion{Potion:night_vision},Lingering Potion of Night Vision
+lingering_potion{Potion:long_night_vision},Long Lingering Potion of Night Vision
+lingering_potion{Potion:invisibility},Lingering Potion of Invisibility
+lingering_potion{Potion:long_invisibility},Long Lingering Potion of Invisibility
+lingering_potion{Potion:leaping},Lingering Potion of Leaping
+lingering_potion{Potion:long_leaping},Long Lingering Potion of Leaping
+lingering_potion{Potion:strong_leaping},Strong Lingering Potion of Leaping
+lingering_potion{Potion:fire_resistance},Lingering Potion of Fire Resistance
+lingering_potion{Potion:long_fire_resistance},Long Lingering Potion of Fire Resistance
+lingering_potion{Potion:swiftness},Lingering Potion of Swiftness
+lingering_potion{Potion:long_swiftness},Long Lingering Potion of Swiftness
+lingering_potion{Potion:strong_swiftness},Strong Lingering Potion of Swiftness
+lingering_potion{Potion:slowness},Lingering Potion of Slowness
+lingering_potion{Potion:long_slowness},Long Lingering Potion of Slowness
+lingering_potion{Potion:strong_slowness},Strong Lingering Potion of Slowness
+lingering_potion{Potion:turtle_master},Lingering Potion of the Turtle Master
+lingering_potion{Potion:long_turtle_master},Long Lingering Potion of the Turtle Master
+lingering_potion{Potion:strong_turtle_master},Strong Lingering Potion of the Turtle Master
+lingering_potion{Potion:water_breathing},Lingering Potion of Water Breathing
+lingering_potion{Potion:long_water_breathing},Long Lingering Potion of Water Breathing
 lingering_potion{Potion:healing},Lingering Potion of Healing
-lingering_potion{Potion:strong_healing},Lingering Potion of Healing II
+lingering_potion{Potion:strong_healing},Strong Lingering Potion of Healing
 lingering_potion{Potion:harming},Lingering Potion of Harming
-lingering_potion{Potion:strong_harming},Lingering Potion of Harming II
-lingering_potion{Potion:poison},Lingering Potion of Poision (0:11)
-lingering_potion{Potion:long_poison},Lingering Potion of Poison (0:22)
-lingering_potion{Potion:strong_poison},Lingering Potion of Posion II (0:05)
-lingering_potion{Potion:regeneration},Lingering Potion of Regeneration (0:11)
-lingering_potion{Potion:long_regeneration},Lingering Potion of Regeneration (0:22)
-lingering_potion{Potion:strong_regeneration},Lingering Potion of Regeneration II (0:05)
-lingering_potion{Potion:strength},Lingering Potion of Strength (0:45)
-lingering_potion{Potion:long_strength},Lingering Potion of Strength (2:00)
-lingering_potion{Potion:strong_strength},Lingering Potion of Strength II (0:22)
-lingering_potion{Potion:weakness},Lingering Potion of Weakness (0:22)
-lingering_potion{Potion:long_weakness},Lingering Potion of Weakness (1:00)
-lingering_potion{Potion:luck},Lingering Potion of Luck (1:15)
-lingering_potion{Potion:slow_falling},Lingering Potion of Slow Falling (0:22)
-lingering_potion{Potion:long_slow_falling},Lingering Potion of Slow Falling (1:00)
+lingering_potion{Potion:strong_harming},Strong Lingering Potion of Harming
+lingering_potion{Potion:poison},Lingering Potion of Poision
+lingering_potion{Potion:long_poison},Long Lingering Potion of Poison
+lingering_potion{Potion:strong_poison},Strong Lingering Potion of Posion
+lingering_potion{Potion:regeneration},Lingering Potion of Regeneration
+lingering_potion{Potion:long_regeneration},Long Lingering Potion of Regeneration
+lingering_potion{Potion:strong_regeneration},Strong Lingering Potion of Regeneration
+lingering_potion{Potion:strength},Lingering Potion of Strength
+lingering_potion{Potion:long_strength},Long Lingering Potion of Strength
+lingering_potion{Potion:strong_strength},Strong Lingering Potion of Strength
+lingering_potion{Potion:weakness},Lingering Potion of Weakness
+lingering_potion{Potion:long_weakness},Long Lingering Potion of Weakness
+lingering_potion{Potion:luck},Lingering Potion of Luck
+lingering_potion{Potion:slow_falling},Lingering Potion of Slow Falling
+lingering_potion{Potion:long_slow_falling},Long Lingering Potion of Slow Falling

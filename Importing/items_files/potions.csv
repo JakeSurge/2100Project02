@@ -5,41 +5,41 @@ potion{Potion:empty},Uncraftable Potion
 potion{Potion:awkward},Akward Potion
 potion{Potion:thick},Thick Potion
 potion{Potion:mundane},Mundane Potion
-potion{Potion:regeneration},Potion of Regeneration (0:45)
-potion{Potion:swiftness},Potion of Swiftness (3:00)
-potion{Potion:fire_resistance},Potion of Fire Resistance (3:00)
-potion{Potion:poison},Potion of Poison (0:45)
+potion{Potion:regeneration},Potion of Regeneration 
+potion{Potion:swiftness},Potion of Swiftness 
+potion{Potion:fire_resistance},Potion of Fire Resistance 
+potion{Potion:poison},Potion of Poison 
 potion{Potion:healing},Potion of Healing
-potion{Potion:night_vision},Potion of Night Vision (3:00)
-potion{Potion:weakness},Potion of Weakness (1:30)
-potion{Potion:strength},Potion of Strength (3:00)
-potion{Potion:slowness},Potion of Slowness (1:30)
+potion{Potion:night_vision},Potion of Night Vision
+potion{Potion:weakness},Potion of Weakness
+potion{Potion:strength},Potion of Strength
+potion{Potion:slowness},Potion of Slowness
 potion{Potion:harming},Potion of Harming
-potion{Potion:water_breathing},Potion of Water Breathing (3:00)
-potion{Potion:invisibility},Potion of Invisibility (3:00)
-potion{Potion:strong_regeneration},Potion of  Regeneration II (0:22)
-potion{Potion:strong_swiftness},Potion of Swiftness II (1:30)
-potion{Potion:strong_poison},Potion of Poison II (0:21)
-potion{Potion:strong_healing},Potion of Healing II
-potion{Potion:strong_strength},Potion of Strength II (1:30)
-potion{Potion:strong_leaping},Potion of Leaping II (1:30)
-potion{Potion:strong_harming},Potion of Harming II
-potion{Potion:long_regeneration},Potion of Regeneration (1:30)
-potion{Potion:long_swiftness},Potion of Swiftness (8:00)
-potion{Potion:long_fire_resistance},Potion of Fire Resistance (8:00)
-potion{Potion:long_poison},Potion of Poison (1:30)
-potion{Potion:long_night_vision},Potion of Night Vision (8:00)
-potion{Potion:long_weakness},Potion of Weakness (4:00)
-potion{Potion:long_strength},Potion of Strength (8:00)
-potion{Potion:long_slowness},Potion of Slowness (4:00)
-potion{Potion:leaping},Potion of Leaping (3:00)
-potion{Potion:long_water_breathing},Potion of Water Breathing (8:00)
-potion{Potion:long_invisibility},Potion of Invisibility (8:00)
-potion{Potion:turtle_master},Potion of the Turtle Master (0:20)
-potion{Potion:long_turtle_master},Potion of the Turtle Master (0:40)
-potion{Potion:strong_turtle_master},Potion of the Turtle Master II (0:20)
-potion{Potion:slow_falling},Potion of Slow Falling (1:30)
-potion{Potion:long_slow_falling},Potion of Slow Falling (4:00)
-potion{Potion:luck},Potion of Luck (5:00)
-potion{Potion:long_leaping},Potion of Leaping (8:00)
-potion{Potion:strong_slowness},Potion of Slowness IV (0:20)
+potion{Potion:water_breathing},Potion of Water Breathing
+potion{Potion:invisibility},Potion of Invisibility 
+potion{Potion:strong_regeneration},Strong Potion of  Regeneration
+potion{Potion:strong_swiftness},Strong Potion of Swiftness
+potion{Potion:strong_poison},Strong Potion of Poison
+potion{Potion:strong_healing},Strong Potion of Healing
+potion{Potion:strong_strength},Strong Potion of Strength
+potion{Potion:strong_leaping},Strong Potion of Leaping
+potion{Potion:strong_harming},Strong Potion of Harming
+potion{Potion:long_regeneration},Long Potion of Regeneration
+potion{Potion:long_swiftness},Long Potion of Swiftness
+potion{Potion:long_fire_resistance},Long Potion of Fire Resistance
+potion{Potion:long_poison},Long Potion of Poison
+potion{Potion:long_night_vision},Long Potion of Night Vision
+potion{Potion:long_weakness},Long Potion of Weakness
+potion{Potion:long_strength},Long Potion of Strength
+potion{Potion:long_slowness},Long Potion of Slowness
+potion{Potion:leaping},Potion of Leaping
+potion{Potion:long_water_breathing},Long Potion of Water Breathing
+potion{Potion:long_invisibility},Long Potion of Invisibility
+potion{Potion:turtle_master},Potion of the Turtle Master
+potion{Potion:long_turtle_master},Long Potion of the Turtle Master
+potion{Potion:strong_turtle_master},Strong Potion of the Turtle Master
+potion{Potion:slow_falling},Potion of Slow Falling
+potion{Potion:long_slow_falling},Long Potion of Slow Falling
+potion{Potion:luck},Potion of Luck
+potion{Potion:long_leaping},Long Potion of Leaping
+potion{Potion:strong_slowness},Strong Potion of Slowness
