@@ -1,16 +1,14 @@
-import psycopg as pg
-#from psycopg import connect, sql
+# import psycopg as pg
+from psycopg import connect, sql
 
 def select_view(view):
     cursor = connection.cursor()  # cursor for db connection
 
     # string variable for the select statement
-    cmd = ("SELECT * FROM %s;")\
-    #    .format(sql.Identifier("*"),
-    #            sql.Placeholder())
+    cmd = sql.SQL("SELECT * FROM {};").format(sql.Identifier(view))
 
     # execute the select statement
-    cursor.execute(cmd, (view, ))
+    cursor.execute(cmd, )
 
     # take the output
     output = cursor.fetchall()
@@ -29,24 +27,22 @@ try:
     # dictionary of the different views partnered with their command
     # counterpart
     VIEW_DICT = {
-        "default": "public.default",
-        "breaking speeds": "public.breaking_speeds_view",
-        "food effects": "public.food_effects_view",
-        "smelting obtainable": "public.smelting_obtainable_view",
-        "smeltable items": "public.smeltable_items_view",
-        "fuel duration": "public.fuel_duration_view",
-        "food items": "public.food_items_view",
-        "cooldown": "public.cooldown_view"
+        "default": "default",
+        "breaking speeds": "breaking_speeds_view",
+        "food effects": "food_effects_view",
+        "smelting obtainable": "smelting_obtainable_view",
+        "smeltable items": "smeltable_items_view",
+        "fuel duration": "fuel_duration_view",
+        "food items": "food_items_view",
+        "cooldown": "cooldown_view"
     }
 
     # connection to minecraft_items database
-    connection = pg.connect(
+    connection = connect(
         'dbname=minecraft_items user=postgres password=Ilikepie13$ port=5432')
 
     # display help message
     print(HELP_MESSAGE)
-
-    select_view("public.food_effects_view")
 
     # start while loop to prompt user until the quit
     while True:
@@ -70,12 +66,14 @@ try:
             except BaseException:
                 # send error message
                 print("ERROR INCORRECT INPUT!!! TRY AGAIN!!!")
+        
         elif query_type == "custom":
-            # work on this later
-        #elif query_type == "quit" or query_type == "exit":
+            #put code here later
+            print("You have selected custom")
+        
+        elif query_type == "exit" or query_type == "quit":
+            #break out of loop
             break
-        else:
-            print("ERROR INCORRECT INPUT!!! TRY AGAIN!!!")
 finally:
     if connection:
         connection.close()
