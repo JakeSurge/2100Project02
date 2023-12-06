@@ -8,11 +8,16 @@ CREATE INDEX item_name ON public.items USING GIN (item_name);
 CREATE INDEX attack ON public.items (attack_damage) INCLUDE(attack_speed);
 
 --Views for easily accessible defaults views of information from the database
+--Sub View for Damage Per Second
+CREATE MATERIALIZED VIEW public.damage_per_second AS
+	SELECT items.item_id, round( CAST(float8 (items.attack_damage * items.attack_speed) as numeric), 2) as damage_per_second FROM items;
 --Default View
+--A bit complicated I dont use * since I want dps to be next to damage and speed
 CREATE MATERIALIZED VIEW public.default AS
-	SELECT items.*, survival_obtainable.survival_obtainable FROM items, survival_obtainable
-		WHERE items.item_id = survival_obtainable.item_id
-		ORDER BY items.item_id ASC;
+	SELECT i.item_id, i.item_name, i.stackability, i.attack_speed, i.attack_damage, dps.damage_per_second, i.peaceful_obtainable, i.renewable, surv.survival_obtainable FROM items as i, survival_obtainable AS surv, public.damage_per_second AS dps
+		WHERE i.item_id = surv.item_id
+		AND i.item_id = dps.item_id
+		ORDER BY i.item_id ASC;
 --Breaking Speeds View
 CREATE MATERIALIZED VIEW public.breaking_speeds_view AS
 	SELECT items.item_id, items.item_name, breaking_types.breaking_type_name, breaking_speeds.breaking_speed FROM items, breaking_types, breaking_speeds

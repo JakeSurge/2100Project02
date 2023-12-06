@@ -13,8 +13,9 @@ def select_view(view):
     # take the output
     output = cursor.fetchall()
 
-    # do something with output?
-    print(output)
+    # print output
+    for row in output:
+        print(row)
 
     # close the cursor
     cursor.close()
@@ -22,7 +23,7 @@ def select_view(view):
 
 try:
     # variable for help message in program to give command instructions
-    HELP_MESSAGE = """"""
+    HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19"""
 
     # dictionary of the different views partnered with their command
     # counterpart
@@ -69,7 +70,7 @@ try:
         
         elif query_type == "custom":
             #put code here later
-            print("You have selected custom")
+            print("Provide a list of attributes, the item ID and name will automatically be included so do not put them in the list.")
         
         elif query_type == "exit" or query_type == "quit":
             #break out of loop
