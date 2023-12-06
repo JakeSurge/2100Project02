@@ -8,7 +8,7 @@ CREATE INDEX item_name ON public.items USING GIN (item_name);
 CREATE INDEX attack ON public.items (attack_damage) INCLUDE(attack_speed);
 
 --Views for easily accessible defaults views of information from the database
---Main Items Table View
+--Default View
 CREATE MATERIALIZED VIEW public.default AS
 	SELECT items.*, survival_obtainable.survival_obtainable FROM items, survival_obtainable
 		WHERE items.item_id = survival_obtainable.item_id
