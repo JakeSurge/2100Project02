@@ -1,7 +1,23 @@
 # import psycopg as pg
 from psycopg import connect, sql
 
-def select_view(view):
+def paginate_output(output):
+    row_amount = len(output)            # amount of rows in current output
+
+    # use amount of rows to make for loop for pagination
+    for i in range(row_amount):
+        # print current row
+        print(output[i])
+
+        # if at a row count of 10 prompt user to continue
+        if (i + 1) % 10 == 0 and i != (row_amount - 1):
+            cont = input("Press ENTER to continue (input anything else to stop)...")        # user input to continue or not
+
+            # stop loop if user no longer wants to continue
+            if cont != "":
+                break
+
+def select_view(view: str):
     cursor = connection.cursor()  # cursor for db connection
 
     # string variable for the select statement
@@ -13,9 +29,8 @@ def select_view(view):
     # take the output
     output = cursor.fetchall()
 
-    # print output
-    for row in output:
-        print(row)
+    # pass to paginate function
+    paginate_output(output)
 
     # close the cursor
     cursor.close()
@@ -61,6 +76,8 @@ try:
             try:
                 # translate view command to actual view value
                 view = VIEW_DICT[view_type]
+
+                
 
                 # pass view value to select_view function
                 select_view(view)
