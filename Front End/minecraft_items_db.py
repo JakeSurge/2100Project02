@@ -124,8 +124,7 @@ while (True):
 
 try:
     # connection to minecraft_items database
-    connection = connect(
-        f'dbname=minecraft_items user={username} password={password} port=5432')
+    connection = connect(f'dbname=minecraft_items user={username} password={password} port=5432')
 
     # display help message
     print(HELP_MESSAGE)
@@ -133,15 +132,13 @@ try:
     # start while loop to prompt user until the quit
     while True:
         # prompt for input
-        query_type = input(
-            "Select either 'preset' or 'custom' to start querying: ").lower()
+        query_type = input("Select either 'preset' or 'custom' to start querying: ").lower()
 
         # decision logic for query type and onward
         # decision logic for views queries
         if query_type == "preset":
             # prompt user again for what view
-            view_type = input(
-                "Select what view you want to see (default, breaking speeds, food effects, smelting obtainable, smeltable items, fuel duration, food items, cooldown): ").lower()
+            view_type = input("Select what view you want to see (default, breaking speeds, food effects, smelting obtainable, smeltable items, fuel duration, food items, cooldown): ").lower()
 
             # check for view
             try:
