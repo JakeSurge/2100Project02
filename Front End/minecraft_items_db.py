@@ -38,11 +38,11 @@ def paginate_output(output, attributes):
     row_amount = len(output)            # amount of rows in current output
 
     # create variable early for set data type
-    header = str("| ")
+    header = str("|")
 
     # create header to print
     for attribute in attributes:
-        header += (f"{attribute} | ")
+        header += (f" {attribute} | ")
     
     # print header
     print(header)
@@ -50,11 +50,11 @@ def paginate_output(output, attributes):
     # use amount of rows to make for loop for pagination
     for i in range(row_amount):
         # create variable early for set data type
-        row = str("| ")
+        row = str("|")
         
         # format current row
         for column in output[i]:
-            row += (f"{column} | ")
+            row += (f" {column} |")
         
         # print row
         print(row)
