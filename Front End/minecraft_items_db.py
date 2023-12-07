@@ -35,24 +35,90 @@ def select_view(view: str, search_attr: str, search_str: str, order_type: str, a
     # close the cursor
     cursor.close()
 
-# insert information for a new item
-def add_item(table:str, attribute_values):
+# insert information for a new item in items table
+def add_item(id:str, name:str, stack:int, a_speed, a_damage, p_obtain:bool, renew:bool):
     cursor = connection.cursor()  # cursor for db connection
 
-    # string variable for insert statement
-    cmd = sql.SQL("""INSERT INTO  {}
-                     VALUES ({});""")\
-        .format(sql.Identifier(table),
-                sql.Placeholder())
+    # use try finally to make sure cursor closes
+    try:
+        # string variable for insert statement
+        cmd = sql.SQL("""INSERT INTO  {}
+                        VALUES ({}, {}, {}, {}, {}, {}, {});""")\
+            .format(sql.Identifier("items"),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder(),)
+        
+        # execute the insert statement
+        cursor.execute(cmd, (id, name, stack, a_speed, a_damage, p_obtain, renew))
+
+        # commit new information
+        connection.commit()
+
+        # output success message
+        print("Item successfully added to items table.")
     
-    # execute the insert statement
-    cursor.execute(cmd, (attribute_values, ))
+    # make sure cursor closes
+    finally:
+        if cursor:
+            cursor.close()
 
-    # commit new information
-    cursor.commit()
+# insert information for a new item in survival_obtainable table
+def add_survive(id:str, survive:bool):
+    cursor = connection.cursor()  # cursor for db connection
 
-    # close the cursor
-    cursor.close()
+    try:
+        # string variable for insert statement
+        cmd = sql.SQL("""INSERT INTO  {}
+                        VALUES ({}, {});""")\
+            .format(sql.Identifier("survival_obtainable"),
+                    sql.Placeholder(),
+                    sql.Placeholder())
+        
+        # execute the insert statement
+        cursor.execute(cmd, (id, survive))
+
+        # commit new information
+        connection.commit()
+
+        # output success message
+        print("Item successfully added to survival_obtainable table.")
+    
+    # make sure cursor closes
+    finally:
+        if cursor:
+            cursor.close()
+
+# insert information for a new item in breaking_speeds
+def add_b_speed(id:str, b_type_id:int, b_speed):
+    cursor = connection.cursor()  # cursor for db connection
+
+    try:
+        # string variable for insert statement
+        cmd = sql.SQL("""INSERT INTO  {}
+                        VALUES ({}, {}, {});""")\
+            .format(sql.Identifier("breaking_speeds"),
+                    sql.Placeholder(),
+                    sql.Placeholder(),
+                    sql.Placeholder())
+        
+        # execute the insert statement
+        cursor.execute(cmd, (id, b_type_id, b_speed))
+
+        # commit new information
+        connection.commit()
+
+        # output success message
+        print("Item successfully added to breaking speeds")
+    
+    # make sure cursor closes
+    finally:
+        if cursor:
+            cursor.close()
 
 # function that paginates the output from the query
 def paginate_output(output, attributes):
@@ -118,12 +184,6 @@ VIEW_ATTRIBUTES_DICT = {
     "cooldown": ["ID", "Name", "Cooldown"]
 }
 
-# dictionary of all the attributes for the custom search
-CUSTOM_ATTRIBUTES = {
-
-}
-
-
 # Make user login for connection
 while (True):
     # ask the user to login in order to connect to the database
@@ -155,7 +215,7 @@ try:
 
         # decision logic for query type and onward
         # decision logic for views queries
-        if query_type == "preset":
+        if query_type == "view":
             # prompt user again for what view
             view_type = input("Select what view you want to see (default, breaking speeds, food effects, smelting obtainable, smeltable items, fuel duration, food items, cooldown): ").lower()
 
@@ -217,35 +277,69 @@ try:
             items = input("Start by providing the ID, Name, Stackability, Attack Speed, Attack Damage, Peaceful Obtainable, and Renewable values.\nEx. example_item, Example Item, 64, 4, 1, True, False\nInput HERE: ")
             
             # split it with split function
-            items_values = items.split(", ", )
+            items_values = items.split(", ")
 
             # check amount of inputs
             if (len(items_values) != 7):
                 print("ERROR INVALID AMOUNT OF INPUTS!")
                 continue
 
-            # save item id for later use
-            item_id = items_values[0]
-            
+            # set values to variables for legibility
+            id = items_values[0]
+            name = items_values[1]
+            stack = items_values[2]
+            a_damage = items_values[3]
+            a_speed = items_values[4]
+            p_obtain = items_values[5]
+            renew = items_values[6]
+
             # run insert for items table with input but in try catch
             try:
-                add_item("items", items_values)
+                add_item(id, name, stack, a_damage, a_speed, p_obtain, renew)
             except Exception as e:
                 print(e)
-                continue
+                break
             
             # move on to survival obtainable input
             survival_obtainable = input("Enter 'true' or 'false' if this item can be obtained in survival: ")
-
+            
             # enter information in try catch
             try:
-                add_item("survival_obtainable", (item_id, survival_obtainable))
+                add_survive(id, survival_obtainable)
             except Exception as e:
                 print(e)
-                continue
+                break
             
-            # enter more information?
-            
+            # enter information for breaking speeds
+            while(True):
+                # prompt for input
+                b_speed = input("Enter the breaking speed type ID and the breaking speed:\nEx. 1, 1\nEnter HERE: ")
+
+                # split the input
+                b_speed_values = b_speed.split(", ")
+
+                # check amount of inputs and send error if wrong
+                if len(b_speed_values) != 2:
+                    print("ERROR INVALID AMOUNT OF INPUTS!")
+                    break
+
+                # setup variable for legibility
+                b_type_id = b_speed_values[0]
+                b_speed_num = b_speed_values[1]
+
+                # enter information in try catch
+                try:
+                    add_b_speed(id, b_type_id, b_speed_num)
+                except Exception as e:
+                    print(e)
+                    break
+
+                # ask user if they want to add an additional speed
+                cont = input("Press ENTER to continue (input anything else to stop)...")
+
+                # stop loop if user no longer wants to add breaking speeds
+                if (cont != ""):
+                    break
 
         # break out of loop with proper command
         elif query_type == "exit" or query_type == "quit":
