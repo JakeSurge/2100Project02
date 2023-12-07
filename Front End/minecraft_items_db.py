@@ -35,6 +35,25 @@ def select_view(view: str, search_attr: str, search_str: str, order_type: str, a
     # close the cursor
     cursor.close()
 
+# insert information for a new item
+def add_item(table:str, attribute_values):
+    cursor = connection.cursor()  # cursor for db connection
+
+    # string variable for insert statement
+    cmd = sql.SQL("""INSERT INTO  {}
+                     VALUES ({});""")\
+        .format(sql.Identifier(table),
+                sql.Placeholder())
+    
+    # execute the insert statement
+    cursor.execute(cmd, (attribute_values, ))
+
+    # commit new information
+    cursor.commit()
+
+    # close the cursor
+    cursor.close()
+
 # function that paginates the output from the query
 def paginate_output(output, attributes):
     row_amount = len(output)            # amount of rows in current output
@@ -132,7 +151,7 @@ try:
     # start while loop to prompt user until the quit
     while True:
         # prompt for input
-        query_type = input("Select either 'preset' or 'custom' to start querying: ").lower()
+        query_type = input("Select either 'view' or 'add' to start querying: ").lower()
 
         # decision logic for query type and onward
         # decision logic for views queries
@@ -191,11 +210,43 @@ try:
                 # run select_view with search parameters
                 select_view(view, search_attr, search_str, order_type, attributes)
         
-        # decision logic for custom queries
-        elif query_type == "custom":
-            #put code here later
-            print("Provide a list of attributes, the item ID and name will automatically be included so do not put them in the list.")
-        
+        # decision logic for adding items
+        elif query_type == "add":
+            # go table by table inserting and adding values to the different tables if necessary
+            # start by asking for main inputs for the items table
+            items = input("Start by providing the ID, Name, Stackability, Attack Speed, Attack Damage, Peaceful Obtainable, and Renewable values.\nEx. example_item, Example Item, 64, 4, 1, True, False\nInput HERE: ")
+            
+            # split it with split function
+            items_values = items.split(", ", )
+
+            # check amount of inputs
+            if (len(items_values) != 7):
+                print("ERROR INVALID AMOUNT OF INPUTS!")
+                continue
+
+            # save item id for later use
+            item_id = items_values[0]
+            
+            # run insert for items table with input but in try catch
+            try:
+                add_item("items", items_values)
+            except Exception as e:
+                print(e)
+                continue
+            
+            # move on to survival obtainable input
+            survival_obtainable = input("Enter 'true' or 'false' if this item can be obtained in survival: ")
+
+            # enter information in try catch
+            try:
+                add_item("survival_obtainable", (item_id, survival_obtainable))
+            except Exception as e:
+                print(e)
+                continue
+            
+            # enter more information?
+            
+
         # break out of loop with proper command
         elif query_type == "exit" or query_type == "quit":
             break
