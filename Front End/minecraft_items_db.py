@@ -1,6 +1,7 @@
 # import psycopg as pg
 from psycopg import connect, sql
 
+# select a view from the database
 def select_view(view: str, search_attr: str, search_str: str, order_type: str, attributes):
     # first double check order_type to prevent injection
     if order_type != "ASC" and order_type != "DESC":
@@ -34,6 +35,7 @@ def select_view(view: str, search_attr: str, search_str: str, order_type: str, a
     # close the cursor
     cursor.close()
 
+# function that paginates the output from the query
 def paginate_output(output, attributes):
     row_amount = len(output)            # amount of rows in current output
 
@@ -69,42 +71,61 @@ def paginate_output(output, attributes):
             if cont != "":
                 break
 
+# VARIABLES FOR GLOBAL USE OF THE PROGRAM
+# variable for help message in program to give command instructions
+HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19"""
+
+# dictionary of the different views partnered with their command counterpart
+VIEW_DICT = {
+    "default": "default",
+    "breaking speeds": "breaking_speeds_view",
+    "food effects": "food_effects_view",
+    "smelting obtainable": "smelting_obtainable_view",
+    "smeltable items": "smeltable_items_view",
+    "fuel duration": "fuel_duration_view",
+    "food items": "food_items_view",
+    "cooldown": "cooldown_view"
+}
+
+# dictionary of the attributes of every view
+VIEW_ATTRIBUTES_DICT = {
+    "default": ["ID", "Name", "Stackability", "Attack Speed", "Attack Damage", "Damage Per Second", "Peaceful Obtainable", "Renewable", "Survival Obtainable"],
+    "breaking speeds": ["ID", "Name", "Breaking Type", "Breaking Speed"],
+    "food effects": ["ID", "Name", "Effect", "Effect Degree", "Time", "Chance"],
+    "smelting obtainable": ["ID", "Name", "Smelting Method (Obtained)"],
+    "smeltable items": ["ID", "Name", "XP From Smelting", "Smelting Method"],
+    "fuel duration": ["ID", "Name", "Fuel Duration"],
+    "food items": ["ID", "Name", "Hunger", "Saturation"],
+    "cooldown": ["ID", "Name", "Cooldown"]
+}
+
+# dictionary of all the attributes for the custom search
+CUSTOM_ATTRIBUTES = {
+
+}
+
+
+# Make user login for connection
+while (True):
+    # ask the user to login in order to connect to the database
+    username = input("Please enter you username and password\nUsername: ")
+    password = input("Password: ")
+
+    # make sure username and password are right return error otherwise
+    if username == "postgres" and password == "Ilikepie13$":
+        print("Logging in user 'postgres'...")
+        break
+    elif username == "standard_user" and password == "password123":
+        print("Logging in user 'standard_user'...")
+        break
+    else:
+        print("ERROR IMPROPER LOGIN INFORMATION! PLEASE TRY AGAIN!")
+
+
 try:
-    # variable for help message in program to give command instructions
-    HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19"""
-
-    # dictionary of the different views partnered with their command counterpart
-    VIEW_DICT = {
-        "default": "default",
-        "breaking speeds": "breaking_speeds_view",
-        "food effects": "food_effects_view",
-        "smelting obtainable": "smelting_obtainable_view",
-        "smeltable items": "smeltable_items_view",
-        "fuel duration": "fuel_duration_view",
-        "food items": "food_items_view",
-        "cooldown": "cooldown_view"
-    }
-
-    # dictionary of the attributes of every view
-    VIEW_ATTRIBUTES_DICT = {
-        "default": ["ID", "Name", "Stackability", "Attack Speed", "Attack Damage", "Damage Per Second", "Peaceful Obtainable", "Renewable", "Survival Obtainable"],
-        "breaking speeds": ["ID", "Name", "Breaking Type", "Breaking Speed"],
-        "food effects": ["ID", "Name", "Effect", "Effect Degree", "Time", "Chance"],
-        "smelting obtainable": ["ID", "Name", "Smelting Method (Obtained)"],
-        "smeltable items": ["ID", "Name", "XP From Smelting", "Smelting Method"],
-        "fuel duration": ["ID", "Name", "Fuel Duration"],
-        "food items": ["ID", "Name", "Hunger", "Saturation"],
-        "cooldown": ["ID", "Name", "Cooldown"]
-    }
-
-    # dictionary of all the attributes for the custom search
-    CUSTOM_ATTRIBUTES = {
-
-    }
-
     # connection to minecraft_items database
     connection = connect(
-        'dbname=minecraft_items user=postgres password=Ilikepie13$ port=5432')
+        f'dbname=minecraft_items user={username} password={password} port=5432')
 
     # display help message
     print(HELP_MESSAGE)

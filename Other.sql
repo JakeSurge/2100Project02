@@ -57,3 +57,6 @@ CREATE MATERIALIZED VIEW public.cooldown_view AS
 	Select items.item_id, items.item_name, cooldown.cooldown FROM items, cooldown
 		WHERE items.item_id = cooldown.item_id
 		ORDER BY items.item_id ASC;
+
+--Granting permission on standard_user
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO standard_user;
