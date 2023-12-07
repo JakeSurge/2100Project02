@@ -1,5 +1,7 @@
 # import psycopg as pg
 from psycopg import connect, sql
+# import inspect for easy tutorial output
+import inspect
 
 # select a view from the database
 def select_view(view: str, search_attr: str, search_str: str, order_type: str, attributes):
@@ -34,6 +36,42 @@ def select_view(view: str, search_attr: str, search_str: str, order_type: str, a
 
     # close the cursor
     cursor.close()
+
+# function that paginates the output from the query
+def paginate_output(output, attributes):
+    row_amount = len(output)            # amount of rows in current output
+
+    # create variable early for set data type
+    header = str("|")
+
+    # create header to print
+    for attribute in attributes:
+        header += (f" {attribute} | ")
+    
+    # print header
+    print(header)
+
+    # use amount of rows to make for loop for pagination
+    for i in range(row_amount):
+        # create variable early for set data type
+        row = str("|")
+        
+        # format current row
+        for column in output[i]:
+            row += (f" {column} |")
+        
+        # print row
+        print(row)
+
+        # if at a row count of 10 prompt user to continue
+        if (i + 1) % 10 == 0 and i != (row_amount - 1):
+            
+            # user input to continue or not
+            cont = input("Press ENTER to continue (input anything else to stop)...")
+
+            # stop loop if user no longer wants to continue
+            if cont != "":
+                break
 
 # insert information for a new item in items table
 def add_item(id:str, name:str, stack:int, a_speed, a_damage, p_obtain:bool, renew:bool):
@@ -120,45 +158,46 @@ def add_b_speed(id:str, b_type_id:int, b_speed):
         if cursor:
             cursor.close()
 
-# function that paginates the output from the query
-def paginate_output(output, attributes):
-    row_amount = len(output)            # amount of rows in current output
-
-    # create variable early for set data type
-    header = str("|")
-
-    # create header to print
-    for attribute in attributes:
-        header += (f" {attribute} | ")
-    
-    # print header
-    print(header)
-
-    # use amount of rows to make for loop for pagination
-    for i in range(row_amount):
-        # create variable early for set data type
-        row = str("|")
-        
-        # format current row
-        for column in output[i]:
-            row += (f" {column} |")
-        
-        # print row
-        print(row)
-
-        # if at a row count of 10 prompt user to continue
-        if (i + 1) % 10 == 0 and i != (row_amount - 1):
-            
-            # user input to continue or not
-            cont = input("Press ENTER to continue (input anything else to stop)...")
-
-            # stop loop if user no longer wants to continue
-            if cont != "":
-                break
-
 # VARIABLES FOR GLOBAL USE OF THE PROGRAM
 # variable for help message in program to give command instructions
-HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19"""
+HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19. There are
+                  two main actions that can be performed to interact with the data: 'view' and 'add'.
+                  
+                        'view': Command that allows you to view data in the database all users can access 
+                        this command. After choosing this command you will be given options of what view to
+                        select. Every view will have the item ID and name as two of the columns available.
+                        
+                        View Options:
+                        1. default - Main view of all items with all common attributes excluding breaking speeds
+                        since that includes repeats of items for different breaking types.
+                        2. breaking speeds - Table of all breaking speeds of all items. Includes multiple types
+                        of breaking (different surfaces) and the associated speeds for all items.
+                        3. food effects - Table of food items that have effects. Food items can have multiple 
+                        effects so items can repeat with different effects of different degrees etc.
+                        4. smelting obtainable - Table of all items that can be obtained from smelting as well as
+                        how an item can be smelted to obtain them
+                        5. smeltable items - Table of all items that can be smelted, the XP given by that, and how
+                        they can be smelted
+                        6. fuel duration - Table of the duration items can be used for fuel (if it can be)
+                        7. food items - Table of the hunger and saturation stats given when a food item is consumed
+                        8. cooldown - Table of the cooldown of items (if it applies)
+
+                        After choosing your view you will be prompted to enter terms for the search by
+                        selecting between searching by the item ID or item name followed by your search
+                        parameter and the order type (ascending - ASC, or descending - DESC). The data is
+                        always ordered by the item ID.
+                            Ex. 'id wood ASC' would provide all tuples with 'wood' in the id in ascending
+                            order by the item ID.
+                        
+                        If you would like to pull up all results just press enter. If you would like to find 
+                        all results in descending order use '%' as the search parameter like below.
+                            Ex. 'id % DESC' would provide all tuples in descending order by the item ID.
+                        
+                        'add': Command that allows superusers to add new items to the database. Only superusers can
+                        access this command. After choosing this command it will go through step by step how to input
+                        the data and format it and will return errors at every case if present. Since only superusers
+                        are using this command documentation is not as necessary.
+                            """
 
 # dictionary of the different views partnered with their command counterpart
 VIEW_DICT = {
@@ -192,11 +231,13 @@ while (True):
 
     # make sure username and password are right return error otherwise
     if username == "postgres" and password == "Ilikepie13$":
-        print("Logging in user 'postgres'...")
+        print("Logging in user 'postgres'...\n")
         break
     elif username == "standard_user" and password == "password123":
-        print("Logging in user 'standard_user'...")
+        print("Logging in user 'standard_user'...\n")
         break
+    elif username == "" and password == "":
+        exit()
     else:
         print("ERROR IMPROPER LOGIN INFORMATION! PLEASE TRY AGAIN!")
 
@@ -206,12 +247,12 @@ try:
     connection = connect(f'dbname=minecraft_items user={username} password={password} port=5432')
 
     # display help message
-    print(HELP_MESSAGE)
+    print(inspect.cleandoc((HELP_MESSAGE)))
 
     # start while loop to prompt user until the quit
     while True:
         # prompt for input
-        query_type = input("Select either 'view' or 'add' to start querying: ").lower()
+        query_type = input("Select either 'view' or 'add' to start querying (or 'help' for help): ").lower()
 
         # decision logic for query type and onward
         # decision logic for views queries
@@ -340,6 +381,11 @@ try:
                 # stop loop if user no longer wants to add breaking speeds
                 if (cont != ""):
                     break
+        
+        # output help statement if requested
+        elif query_type == "help":
+            # display help message
+            print(inspect.cleandoc((HELP_MESSAGE)))
 
         # break out of loop with proper command
         elif query_type == "exit" or query_type == "quit":
