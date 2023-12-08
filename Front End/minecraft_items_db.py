@@ -160,7 +160,7 @@ def add_b_speed(id:str, b_type_id:int, b_speed):
 
 # VARIABLES FOR GLOBAL USE OF THE PROGRAM
 # variable for help message in program to give command instructions
-HELP_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19. There are
+TUTORIAL_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19. There are
                   two main actions that can be performed to interact with the data: 'view' and 'add'.
                   
                         'view': Command that allows you to view data in the database all users can access 
@@ -211,8 +211,8 @@ VIEW_DICT = {
     "cooldown": "cooldown_view"
 }
 
-# dictionary of the attributes of every view
-VIEW_ATTRIBUTES_DICT = {
+# dictionary of the attributes of every view that become headers
+VIEW_HEADERS_DICT = {
     "default": ["ID", "Name", "Stackability", "Attack Speed", "Attack Damage", "Damage Per Second", "Peaceful Obtainable", "Renewable", "Survival Obtainable"],
     "breaking speeds": ["ID", "Name", "Breaking Type", "Breaking Speed"],
     "food effects": ["ID", "Name", "Effect", "Effect Degree", "Time", "Chance"],
@@ -221,6 +221,32 @@ VIEW_ATTRIBUTES_DICT = {
     "fuel duration": ["ID", "Name", "Fuel Duration"],
     "food items": ["ID", "Name", "Hunger", "Saturation"],
     "cooldown": ["ID", "Name", "Cooldown"]
+}
+
+# dictionary of the attributes in the database with descriptions to be used in help commands
+ATTRIBUTES_DICT = {
+    "id": "Official in game item ID which can be used for in game commands.",
+    "name": "The name of the item (usually the same as the items display name in game).",
+    "stackability": "Amount of the item that can be stacked in one item slot.",
+    "attack speed": "The number of fully charged attacks you can perform per second with the item.",
+    "attack damage": "Amount of attack damage points per strike with the item.",
+    "damage per second": "The amount of damage points per second (calculated by the attack speed x attack damage).",
+    "peaceful obtainable": "Value if the item is obtainable at peaceful difficulty in the survival game mode or not.",
+    "renewable": "Value if the item can be farmed, crafted, or traded or not (if it is not a finite resource).",
+    "survival obtainable": "Value if the item is obtainable in the survival game mode or not.",
+    "breaking type": "The type of block being broken paired with the breaking speed of the item on that block (value of 'default' means most blocks if not all).",
+    "breaking speed": "The breaking speed of the item on a block specified by breaking type",
+    "effect": "The resulting effect (condition that affects an entity in a good or bad way) after the food item has been consumed.",
+    "effect Degree": "The numerical degree of the effect from the item after being consumed.",
+    "time": "The time that the effect from the consumed item will be applied in seconds.",
+    "chance": "The chance that the effect from the consumed item will occur (in decimal format ex. '1' = 100%).",
+    "smelting Method (Obtained)": "The method of smelting (cooking or obtaining refined goods by putting them in a furnace) by which the item can be obtained.",
+    "xp from smelting": "Number of experience points received after smelting the item",
+    "smelting method": "The method of smelting (cooking or obtaining refined goods by putting them in a furnace) by which the item can be smelted.",
+    "fuel duration": "How many seconds the item can be used as a fuel source in the standard furnace.",
+    "hunger": "Number of hunger points the item recovers after being consumed.",
+    "saturation": "Number of saturation points the item recovers after being consumed (Saturation points set the amount of time before the hunger bar decreases).",
+    "cooldown": "Number of seconds the item takes to cooldown after being used (applications vary)."
 }
 
 # Make user login for connection
@@ -247,12 +273,12 @@ try:
     connection = connect(f'dbname=minecraft_items user={username} password={password} port=5432')
 
     # display help message
-    print(inspect.cleandoc((HELP_MESSAGE)))
+    print(inspect.cleandoc(TUTORIAL_MESSAGE))
 
     # start while loop to prompt user until the quit
     while True:
         # prompt for input
-        query_type = input("Select either 'view' or 'add' to start querying (or 'help' for help): ").lower()
+        query_type = input("Select either 'view', 'add', or 'help' to start (or 'exit' to exit): ").lower()
 
         # decision logic for query type and onward
         # decision logic for views queries
@@ -266,7 +292,7 @@ try:
                 view = VIEW_DICT[view_type]
 
                 # translate view command to table header
-                attributes = VIEW_ATTRIBUTES_DICT[view_type]
+                attributes = VIEW_HEADERS_DICT[view_type]
                 
             except BaseException:
                 # send error message
@@ -384,8 +410,35 @@ try:
         
         # output help statement if requested
         elif query_type == "help":
-            # display help message
-            print(inspect.cleandoc((HELP_MESSAGE)))
+            # prompt the user for either the tutorial or attributes
+            help_type = input("Enter what type of help you want ('tutorial' or 'attributes'): ").lower()
+
+            if help_type == "tutorial":
+                # display tutorial message
+                print(inspect.cleandoc(TUTORIAL_MESSAGE))
+            elif help_type == "attributes":
+                # enter into ifinite while so they can keep prompting
+                while(True):
+                    # prompt for what attribute they want help with
+                    attribute = input("What attribute do you want to know about (ex. 'id' for the ID definition, 'all' for list of all, enter 'menu' to go back to start): ").lower()
+
+                    # if all print list of all
+                    if attribute == "all":
+                        # use for loop to print all
+                        for key in ATTRIBUTES_DICT:
+                            print(f"{key}: {ATTRIBUTES_DICT[key]}")
+                    # if they want to exit let them exit
+                    elif attribute == "menu":
+                        break
+                    # otherwise print specific if no error
+                    else:
+                        try:
+                            print(f"{attribute}: {ATTRIBUTES_DICT[attribute]}\n")
+                        except:
+                            # print error and options if they get it wrong
+                            print("ERROR INVALID ATTRIBUTE INPUT! Only use the following terms:\nall")
+                            for key in ATTRIBUTES_DICT:
+                                print(key)
 
         # break out of loop with proper command
         elif query_type == "exit" or query_type == "quit":
