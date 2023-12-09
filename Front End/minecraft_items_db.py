@@ -7,7 +7,7 @@ import inspect
 def select_view(view: str, search_attr: str, search_str: str, order_type: str, attributes):
     # first double check order_type to prevent injection
     if order_type != "ASC" and order_type != "DESC":
-        raise Exception("ERROR INCORRECT ORDER TYPE! SQL INJECTION ATTEMPT DETECTED!")
+        raise Exception("\033[91mERROR INCORRECT ORDER TYPE! SQL INJECTION ATTEMPT DETECTED!\033[0m")
     
     cursor = connection.cursor()  # cursor for db connection
 
@@ -28,7 +28,7 @@ def select_view(view: str, search_attr: str, search_str: str, order_type: str, a
 
     # check is there are no rows and return if so
     if len(output) == 0:
-        print("The resulting query had 0 results.")
+        print("\033[91mThe resulting query had 0 results.\033[0m")
         return
 
     # pass to paginate function
@@ -46,7 +46,7 @@ def paginate_output(output, attributes):
 
     # create header to print
     for attribute in attributes:
-        header += (f" {attribute} | ")
+        header += ( "\033[92m\033[1m " + attribute + "\033[0m |")
     
     # print header
     print(header)
@@ -160,27 +160,27 @@ def add_b_speed(id:str, b_type_id:int, b_speed):
 
 # VARIABLES FOR GLOBAL USE OF THE PROGRAM
 # variable for help message in program to give command instructions
-TUTORIAL_MESSAGE = """This is a database that consists of all items in Minecraft (Java Edition) 1.19. There are
-                  two main actions that can be performed to interact with the data: 'view' and 'add'.
+TUTORIAL_MESSAGE = """\033[1mThis is a database that consists of all items in Minecraft (Java Edition) 1.19. There are
+                  two main actions that can be performed to interact with the data: 'view' and 'add'.\033[0;0m
                   
-                        'view': Command that allows you to view data in the database all users can access 
+                        \033[1m\033[92m'view'\033[0;0m: Command that allows you to view data in the database all users can access 
                         this command. After choosing this command you will be given options of what view to
                         select. Every view will have the item ID and name as two of the columns available.
                         
-                        View Options:
-                        1. default - Main view of all items with all common attributes excluding breaking speeds
+                        \033[1mView Options:\033[0;0m
+                        1. \033[1m\033[92mdefault\033[0;0m - Main view of all items with all common attributes excluding breaking speeds
                         since that includes repeats of items for different breaking types.
-                        2. breaking speeds - Table of all breaking speeds of all items. Includes multiple types
+                        2. \033[1m\033[92mbreaking speeds\033[0;0m - Table of all breaking speeds of all items. Includes multiple types
                         of breaking (different surfaces) and the associated speeds for all items.
-                        3. food effects - Table of food items that have effects. Food items can have multiple 
+                        3. \033[1m\033[92mfood effects\033[0;0m - Table of food items that have effects. Food items can have multiple 
                         effects so items can repeat with different effects of different degrees etc.
-                        4. smelting obtainable - Table of all items that can be obtained from smelting as well as
+                        4. \033[1m\033[92msmelting obtainable\033[0;0m - Table of all items that can be obtained from smelting as well as
                         how an item can be smelted to obtain them
-                        5. smeltable items - Table of all items that can be smelted, the XP given by that, and how
+                        5. \033[1m\033[92msmeltable items\033[0;0m - Table of all items that can be smelted, the XP given by that, and how
                         they can be smelted
-                        6. fuel duration - Table of the duration items can be used for fuel (if it can be)
-                        7. food items - Table of the hunger and saturation stats given when a food item is consumed
-                        8. cooldown - Table of the cooldown of items (if it applies)
+                        6. \033[1m\033[92mfuel duration\033[0;0m - Table of the duration items can be used for fuel (if it can be)
+                        7. \033[1m\033[92mfood items\033[0;0m - Table of the hunger and saturation stats given when a food item is consumed
+                        8. \033[1m\033[92mcooldown\033[0;0m - Table of the cooldown of items (if it applies)
 
                         After choosing your view you will be prompted to enter terms for the search by
                         selecting between searching by the item ID or item name followed by your search
@@ -193,10 +193,10 @@ TUTORIAL_MESSAGE = """This is a database that consists of all items in Minecraft
                         all results in descending order use '%' as the search parameter like below.
                             Ex. 'id % DESC' would provide all tuples in descending order by the item ID.
                         
-                        'add': Command that allows superusers to add new items to the database. Only superusers can
+                        \033[1m\033[92m'add'\033[0;0m: Command that allows superusers to add new items to the database. Only superusers can
                         access this command. After choosing this command it will go through step by step how to input
                         the data and format it and will return errors at every case if present. Since only superusers
-                        are using this command documentation is not as necessary.
+                        are using this command more documentation is not provided.
                             """
 
 # dictionary of the different views partnered with their command counterpart
@@ -237,10 +237,10 @@ ATTRIBUTES_DICT = {
     "breaking type": "The type of block being broken paired with the breaking speed of the item on that block (value of 'default' means most blocks if not all).",
     "breaking speed": "The breaking speed of the item on a block specified by breaking type",
     "effect": "The resulting effect (condition that affects an entity in a good or bad way) after the food item has been consumed.",
-    "effect Degree": "The numerical degree of the effect from the item after being consumed.",
+    "effect degree": "The numerical degree of the effect from the item after being consumed.",
     "time": "The time that the effect from the consumed item will be applied in seconds.",
     "chance": "The chance that the effect from the consumed item will occur (in decimal format ex. '1' = 100%).",
-    "smelting Method (Obtained)": "The method of smelting (cooking or obtaining refined goods by putting them in a furnace) by which the item can be obtained.",
+    "smelting method (Obtained)": "The method of smelting (cooking or obtaining refined goods by putting them in a furnace) by which the item can be obtained.",
     "xp from smelting": "Number of experience points received after smelting the item",
     "smelting method": "The method of smelting (cooking or obtaining refined goods by putting them in a furnace) by which the item can be smelted.",
     "fuel duration": "How many seconds the item can be used as a fuel source in the standard furnace.",
@@ -252,20 +252,20 @@ ATTRIBUTES_DICT = {
 # Make user login for connection
 while (True):
     # ask the user to login in order to connect to the database
-    username = input("Please enter you username and password\nUsername: ")
+    username = input("\033[1mPlease enter you username and password.\033[0m\nUsername: ")
     password = input("Password: ")
 
     # make sure username and password are right return error otherwise
     if username == "postgres" and password == "Ilikepie13$":
-        print("Logging in user 'postgres'...\n")
+        print("\033[94mLogging in user 'postgres'...\033[0m\n")
         break
     elif username == "standard_user" and password == "password123":
-        print("Logging in user 'standard_user'...\n")
+        print("\033[94mLogging in user 'standard_user'...\033[0m\n")
         break
     elif username == "" and password == "":
         exit()
     else:
-        print("ERROR IMPROPER LOGIN INFORMATION! PLEASE TRY AGAIN!")
+        print("\033[91mERROR IMPROPER LOGIN INFORMATION! PLEASE TRY AGAIN!\033[0m")
 
 
 try:
@@ -284,7 +284,7 @@ try:
         # decision logic for views queries
         if query_type == "view":
             # prompt user again for what view
-            view_type = input("Select what view you want to see (default, breaking speeds, food effects, smelting obtainable, smeltable items, fuel duration, food items, cooldown): ").lower()
+            view_type = input("Select what view you want to see (use 'help' followed by 'tutorial' to see a list): ").lower()
 
             # check for view
             try:
@@ -296,7 +296,7 @@ try:
                 
             except BaseException:
                 # send error message
-                print("ERROR INVALID VIEW NAME! TRY AGAIN!")
+                print("\033[91mERROR INVALID VIEW NAME! TRY AGAIN!\033[0m")
                 continue
             
             # prompt for search and order terms
@@ -317,7 +317,7 @@ try:
                     order_type = search_terms[2].upper()
                     
                 except BaseException:
-                    print("ERROR INVALID AMOUNT OF INPUTS! MAKE SURE IT LOOKS LIKE 'id stone ASC'!")
+                    print("\033[91mERROR INVALID AMOUNT OF INPUTS! MAKE SURE IT LOOKS LIKE 'id stone ASC'!\033[0m")
                     continue
                 
                 # test and reassign search_attr
@@ -326,12 +326,12 @@ try:
                 elif search_attr == "name":
                     search_attr = "item_name"
                 else:
-                    print("ERROR INVALID SEARCH ATTRIBUTE! ONLY USE 'id' OR 'name'!")
+                    print("\033[91mERROR INVALID SEARCH ATTRIBUTE! ONLY USE 'id' OR 'name'!\033[0m")
                     continue
                     
                 # test order_type
                 if order_type != "ASC" and order_type != "DESC":
-                    print("ERROR INVALID ORDER TYPE! ONLY USE 'ASC' OR 'DESC'!")
+                    print("\033[91mERROR INVALID ORDER TYPE! ONLY USE 'ASC' OR 'DESC'!\033[0m")
                     continue
 
                 # run select_view with search parameters
@@ -348,7 +348,7 @@ try:
 
             # check amount of inputs
             if (len(items_values) != 7):
-                print("ERROR INVALID AMOUNT OF INPUTS!")
+                print("\033[91mERROR INVALID AMOUNT OF INPUTS!\033[0m")
                 continue
 
             # set values to variables for legibility
@@ -387,7 +387,7 @@ try:
 
                 # check amount of inputs and send error if wrong
                 if len(b_speed_values) != 2:
-                    print("ERROR INVALID AMOUNT OF INPUTS!")
+                    print("\033[91mERROR INVALID AMOUNT OF INPUTS!\033[0m")
                     break
 
                 # setup variable for legibility
@@ -416,29 +416,38 @@ try:
             if help_type == "tutorial":
                 # display tutorial message
                 print(inspect.cleandoc(TUTORIAL_MESSAGE))
+            
             elif help_type == "attributes":
                 # enter into ifinite while so they can keep prompting
                 while(True):
                     # prompt for what attribute they want help with
-                    attribute = input("What attribute do you want to know about (ex. 'id' for the ID definition, 'all' for list of all, enter 'menu' to go back to start): ").lower()
+                    attribute = input("What attribute do you want to know about? (use 'all' for all and use 'menu' to go back): ").lower()
 
                     # if all print list of all
                     if attribute == "all":
+                        # initial space
+                        print("\n")
                         # use for loop to print all
                         for key in ATTRIBUTES_DICT:
-                            print(f"{key}: {ATTRIBUTES_DICT[key]}")
+                            print("\033[1m\033[92m" + key + "\033[0;0m: " + ATTRIBUTES_DICT[key])
+                        # final space
+                        print("\n")
                     # if they want to exit let them exit
                     elif attribute == "menu":
                         break
                     # otherwise print specific if no error
                     else:
                         try:
-                            print(f"{attribute}: {ATTRIBUTES_DICT[attribute]}\n")
+                            print("\n\033[1m\033[92m" + attribute + "\033[0;0m: " + ATTRIBUTES_DICT[attribute] + "\n")
                         except:
                             # print error and options if they get it wrong
-                            print("ERROR INVALID ATTRIBUTE INPUT! Only use the following terms:\nall")
+                            print("\033[91mERROR INVALID ATTRIBUTE INPUT! ONLY USE THE FOLLOWING TERMS:\033[0m\nall")
                             for key in ATTRIBUTES_DICT:
                                 print(key)
+            
+            # account for error if wrong selection
+            else:
+                print("\033[91mERROR INVALID INPUT! ONLY USE 'tutorial' OR 'attributes'.\033[0m")
 
         # break out of loop with proper command
         elif query_type == "exit" or query_type == "quit":
@@ -446,7 +455,7 @@ try:
 
         # give error message for anything else
         else:
-            print("ERROR UNREGISTERED COMMAND! TRY AGAIN")
+            print("\033[91mERROR UNREGISTERED COMMAND! TRY AGAIN\033[0m")
 
 # use finally to close connection
 finally:
