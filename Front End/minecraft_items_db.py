@@ -426,24 +426,28 @@ try:
                     # if all print list of all
                     if attribute == "all":
                         # initial space
-                        print("\n")
+                        print("")
                         # use for loop to print all
                         for key in ATTRIBUTES_DICT:
-                            print("\033[1m\033[92m" + key + "\033[0;0m: " + ATTRIBUTES_DICT[key])
+                            print("\033[1m\033[92m" + key + "\033[0;0m - " + ATTRIBUTES_DICT[key])
                         # final space
-                        print("\n")
+                        print("")
+                    
                     # if they want to exit let them exit
                     elif attribute == "menu":
                         break
+                    
                     # otherwise print specific if no error
                     else:
                         try:
                             print("\n\033[1m\033[92m" + attribute + "\033[0;0m: " + ATTRIBUTES_DICT[attribute] + "\n")
                         except:
                             # print error and options if they get it wrong
-                            print("\033[91mERROR INVALID ATTRIBUTE INPUT! ONLY USE THE FOLLOWING TERMS:\033[0m\nall")
+                            print("\033[91mERROR INVALID ATTRIBUTE INPUT! ONLY USE THE FOLLOWING TERMS:\033[0m\n\n\033[1m\033[92mall")
                             for key in ATTRIBUTES_DICT:
-                                print(key)
+                                print("\033[1m\033[92m" + key)
+                            # print end color code and enter to format
+                            print("\033[0m")
             
             # account for error if wrong selection
             else:
