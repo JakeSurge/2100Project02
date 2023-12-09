@@ -1,1 +1,1 @@
-This is the repository for the Project02 from Database Programming (CPSC2100). Instructions for this are included in the PDF in this repository.
+This is the repository for the Project02 from Database Programming (CPSC2100). Instructions for this are included in the PDFs in 'Documentation'. 'CPSC 2100 Project 1.pdf' is the original plan for the project (done in project 1) but since then the database schema has been radically changed along with plans as I focused on fitting the rubric in 'CPSC 2100_Proj02.pdf' instead of my own goals as much.
